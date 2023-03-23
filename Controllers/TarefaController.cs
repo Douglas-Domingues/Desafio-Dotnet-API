@@ -42,7 +42,7 @@ namespace TrilhaApiDesafio.Controllers
         [HttpGet("ObterPorData")]
         public IActionResult ObterPorData(DateTime data)
         {
-            var tarefa = _context.Tarefas.Where(x => x.Data.Date == data.Date);
+            var tarefa = _context.Tarefas.Where(x => x.DataInc.Date == data.Date);
             return Ok(tarefa);
         }
 
@@ -51,18 +51,18 @@ namespace TrilhaApiDesafio.Controllers
         {
             // TODO: Buscar  as tarefas no banco utilizando o EF, que contenha o status recebido por parâmetro
             // Dica: Usar como exemplo o endpoint ObterPorData
-            var tarefa = _context.Tarefas.Where(x => x.Status == status);
+            var tarefa = _context.Tarefas.Where(x => x.Situação == status);
             return Ok(tarefa);
         }
 
         [HttpPost]
         public IActionResult Criar(Tarefa tarefa)
         {
-            if (tarefa.Data == DateTime.MinValue)
+            if (tarefa.DataInc == DateTime.MinValue)
                 return BadRequest(new { Erro = "A data da tarefa não pode ser vazia" });
 
             // TODO: Adicionar a tarefa recebida no EF e salvar as mudanças (save changes)
-            return CreatedAtAction(nameof(ObterPorId), new { id = tarefa.Id }, tarefa);
+            return CreatedAtAction(nameof(ObterPorId), new { ID = tarefa.ID }, tarefa);
         }
 
         [HttpPut("{id}")]
@@ -73,7 +73,7 @@ namespace TrilhaApiDesafio.Controllers
             if (tarefaBanco == null)
                 return NotFound();
 
-            if (tarefa.Data == DateTime.MinValue)
+            if (tarefa.DataInc == DateTime.MinValue)
                 return BadRequest(new { Erro = "A data da tarefa não pode ser vazia" });
 
             // TODO: Atualizar as informações da variável tarefaBanco com a tarefa recebida via parâmetro

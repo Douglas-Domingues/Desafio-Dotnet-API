@@ -14,7 +14,9 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
         CreateHostBuilder(args).Build().Run();
 
-        // Add services to the container.
+// Add services to the container.
+builder.Services.AddDbContext<OrganizadorContext>(options =>
+    options.UseMySQL(builder.Configuration.GetConnectionString("ConexaoPadrao")));
 
         builder.Services.AddControllers().AddJsonOptions(options =>
             options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));

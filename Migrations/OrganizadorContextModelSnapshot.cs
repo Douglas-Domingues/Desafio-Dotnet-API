@@ -21,25 +21,28 @@ namespace TrilhaApiDesafio.Migrations
 
             modelBuilder.Entity("TrilhaApiDesafio.Models.Tarefa", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IDTarefa")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Data")
+                    b.Property<DateTime?>("DataAlt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("DataInc")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Descricao")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("Status")
+                    b.Property<int?>("Status")
                         .HasColumnType("int");
 
                     b.Property<string>("Titulo")
                         .HasColumnType("longtext");
 
-                    b.HasKey("Id");
+                    b.HasKey("IDTarefa");
 
-                    b.ToTable("Tarefas");
+                    b.ToTable("Tarefas", (string)null);
                 });
 #pragma warning restore 612, 618
         }

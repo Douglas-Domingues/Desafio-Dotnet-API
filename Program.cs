@@ -1,22 +1,18 @@
 using System.Configuration;
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
-using MySql.EntityFrameworkCore;
-using MySql.EntityFrameworkCore.Extensions;
-using StartUp;
 using TrilhaApiDesafio.Context;
-using TrilhaApiDesafio.Models;
+
 
 public class Program
 {
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        CreateHostBuilder(args).Build().Run();
 
-// Add services to the container.
-builder.Services.AddDbContext<OrganizadorContext>(options =>
-    options.UseMySQL(builder.Configuration.GetConnectionString("ConexaoPadrao")));
+        // Add services to the container.
+        builder.Services.AddDbContext<OrganizadorContext>(options =>
+            options.UseMySQL(builder.Configuration.GetConnectionString("ConexaoPadrao")));
 
         builder.Services.AddControllers().AddJsonOptions(options =>
             options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
@@ -42,11 +38,4 @@ builder.Services.AddDbContext<OrganizadorContext>(options =>
 
         app.Run();
     }
-
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder.UseStartup<Startup>();
-            });
 }

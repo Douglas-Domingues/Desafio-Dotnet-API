@@ -71,7 +71,7 @@ namespace TrilhaApiDesafio.Controllers
             _context.Tarefas.Add(tarefa);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(ObterPorId), new { id = tarefa.Id }, tarefa);
+            return CreatedAtAction(nameof(ObterPorId), new { id = tarefa.IDTarefa }, tarefa);
         }
 
         [HttpPatch("{id}")]
@@ -80,14 +80,16 @@ namespace TrilhaApiDesafio.Controllers
             var objtarefa = _context.Tarefas.Find(id);
 
             if (objtarefa == null)
-                return NotFound();
+                return NotFound(new { Retorno = "Nenhum registro encontrado." });
             
             if (tarefa.Titulo != null)
                 objtarefa.Titulo = tarefa.Titulo;
             if (tarefa.Descricao != null)
                 objtarefa.Descricao = tarefa.Descricao;
-            if (tarefa.Data != DateTime.MinValue)
-                objtarefa.Data = tarefa.Data;
+            if (tarefa.DataInc != DateTime.MinValue)
+                objtarefa.DataInc = tarefa.DataInc;
+            if (tarefa.DataAlt != DateTime.MinValue)
+                objtarefa.DataAlt = tarefa.DataAlt;
             if (tarefa.Status != null)
                 objtarefa.Status = tarefa.Status;            
 

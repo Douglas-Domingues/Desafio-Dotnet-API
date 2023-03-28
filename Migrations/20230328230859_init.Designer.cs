@@ -11,8 +11,8 @@ using TrilhaApiDesafio.Context;
 namespace TrilhaApiDesafio.Migrations
 {
     [DbContext(typeof(OrganizadorContext))]
-    [Migration("20230325130149_iniciabanco")]
-    partial class iniciabanco
+    [Migration("20230328230859_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,23 +24,26 @@ namespace TrilhaApiDesafio.Migrations
 
             modelBuilder.Entity("TrilhaApiDesafio.Models.Tarefa", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IDTarefa")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Data")
+                    b.Property<DateTime?>("DataAlt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("DataInc")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Descricao")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("Status")
+                    b.Property<int?>("Status")
                         .HasColumnType("int");
 
                     b.Property<string>("Titulo")
                         .HasColumnType("longtext");
 
-                    b.HasKey("Id");
+                    b.HasKey("IDTarefa");
 
                     b.ToTable("Tarefas");
                 });
